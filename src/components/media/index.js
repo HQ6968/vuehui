@@ -3,10 +3,6 @@ import {store} from "../../store";
 
 window.onresize = function (e) {
 
-  if(!getStore()){
-    return
-  }
-
   store.commit("app/setMedia" , {
     winWidth:window.innerWidth,
     winHeight:window.innerHeight,

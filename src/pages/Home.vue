@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <Row>
 
@@ -35,6 +36,8 @@
 <script>
   import {Col, Datatable, IBox, Row} from "../components";
   import {userListApi} from '../service'
+  import {confirm} from "../util/notice";
+  import {Process, Processer , after} from "../util";
 
   export default {
     name: "Home",
@@ -58,7 +61,14 @@
           {
             title: '地址',
             key: 'address',
-          }
+          },
+          {
+            width: 120,
+            _render: [
+              {key: 'add', title: '添加'},
+              {key: 'delete', title: '删除'}
+            ],
+          },
         ],
         filter: [],
         api(page, filter) {
@@ -67,8 +77,15 @@
       }
     },
     methods: {
-      btnClick() {
-
+      btnClick(v) {
+        Process(function *(p : Processer) {
+          p.closeLoading()
+          let ok = yield  confirm({
+            content:"确定要删除?"
+          })
+          p.showLoading()
+          yield after(1)
+        })
       }
     }
   }
