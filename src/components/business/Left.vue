@@ -32,7 +32,7 @@
       </div>
     </li>
 
-    <li v-for="(v,k) in items" :key="k" :class="{active: v.open}">
+    <li v-for="(v,k) in menus" :key="k" :class="{active: v.open}">
       <a href="javascript:;" @click="toggleBlock(v)">
         <i class="fa fa-home"></i> <span class="nav-label">{{v.title}}</span> <span class="fa arrow"></span>
       </a>
@@ -47,63 +47,29 @@
 </template>
 
 <script>
-
+  import {mapState , mapActions} from 'vuex'
   export default {
     name: "Left",
     components:{
     },
+    mounted(){
+      this.getMenuAction()
+    },
     data() {
-      return {
-        items: [
-          {
-            title: "主页",
-            icon: "fa-home",
-            open:false,
-            children: [
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-            ]
-          },
-          {
-            title: "主页",
-            icon: "fa-home",
-            open:false,
-            children: [
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-              {
-                title: "测试",
-                icon: "fa-home",
-              },
-            ]
-          },
-        ]
-      }
+      return {}
+    },
+    computed:{
+      ...mapState('app' , ['menus'])
     },
     methods: {
+      ...mapActions('app' , ['getMenuAction']),
       itemClick(v) {
         this.$emit('itemClick', v)
       },
       toggleBlock(v){
         v.open = !v.open
         if (v.open){
-          this.items.forEach(item => {
+          this.menus.forEach(item => {
             if (item !== v ){
               item.open = false
             }

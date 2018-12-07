@@ -114,11 +114,6 @@
             <router-view></router-view>
           </div>
         </div>
-        <div class="footer">
-          <div class="pull-right">&copy; 2014-2015
-            <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
-          </div>
-        </div>
       </div>
       <!--右侧部分结束-->
       <!--右侧边栏开始-->
